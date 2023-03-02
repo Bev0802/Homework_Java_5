@@ -38,8 +38,8 @@ public class Task_01 {
                 System.exit(0);
 
             } else if (command.equalsIgnoreCase("1")) {
-                System.out.printf("Просмотр всей телефонной книги: %S", bookPhone);
-
+                println(bookPhone);
+                
             } else if (command.equalsIgnoreCase("2")) {
                 System.out.println("Для добавления нового контакта, введите имя: ");
                 name = sc.nextLine();
@@ -99,7 +99,7 @@ public class Task_01 {
         LNP.add(1, numPhone);
 
         bookPhone.put(name, LNP);
-        System.out.println(bookPhone);
+        println(bookPhone);
 
         return bookPhone;
     }
@@ -108,17 +108,16 @@ public class Task_01 {
     public static void contactReples(Map<String, List<String>> bookPhone, String name, String plasePhone,
             String numPhone) {
         List<String> LNP = new ArrayList<>();
-        LNP.addAll(bookPhone.get(name));
-        System.out.println(LNP);
+        LNP.addAll(bookPhone.get(name));        
         LNP.clear();
-        System.out.println(LNP);
-
+        
         LNP.add(0, plasePhone);
         LNP.add(1, numPhone);
 
         bookPhone.put(name, LNP);
-
-        System.out.println(bookPhone);
+        
+        System.out.println();
+        println(bookPhone);
     }
 
     //////////// ФУНКЦИЯ НАХОДИТ КОНТАКТ И ВЫВВОДИТ ВСЕ ЕГО ТЕЛЕФОНЫ
@@ -129,7 +128,8 @@ public class Task_01 {
     ///////////// ФУНКЦИЯ УДАЛЯЕТ КОНТАКТ
     private static void contactcRemove(String name, Map<String, List<String>> bookPhone) {
         bookPhone.remove(name);
-        System.out.println(bookPhone);
+        System.out.println();
+        println(bookPhone);
     }
 
     /////////// ФУНКЦИЯ ДОБАВЛЯЕТ НОМЕР КОНТАКТУ
@@ -142,7 +142,13 @@ public class Task_01 {
         LNP.add(1, numPhone);
 
         bookPhone.put(name, LNP);
-
-        System.out.println(bookPhone);
+        
+        System.out.println();
+        println(bookPhone);
+    }
+    private static void println (Map<String, List<String>> bookPhone){
+        bookPhone.entrySet().stream()
+            .sorted(Map.Entry.<String, List<String>>comparingByKey())
+            .forEach(System.out::println);
     }
 }
